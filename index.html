@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Незабаром: Networking, якого не планував</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@800;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --lime: #b0ff92;
+      --purple: #8b5cf6;
+      --dark: #0f172a;
+      --slate: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--dark);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Mesh Gradient Background */
+    .mesh-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0;
+      opacity: 0.4;
+      background: radial-gradient(at 0% 0%, var(--lime) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, var(--purple) 0px, transparent 50%);
+      filter: blur(40px);
+      animation: pulse 10s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--lime);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      display: block;
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -2px;
+    }
+
+    .highlight {
+      color: var(--purple);
+      position: relative;
+    }
+
+    .status-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 3rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: var(--lime);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--lime);
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .status-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #cbd5e1;
+    }
+
+    /* Loading Bar Animation */
+    .loader {
+      width: 300px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 40px auto 0;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loader-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 40%;
+      background: var(--lime);
+      box-shadow: 0 0 10px var(--lime);
+      animation: slide 2s infinite ease-in-out;
+    }
+
+    @keyframes slide {
+      0% { left: -40%; }
+      100% { left: 100%; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="mesh-bg"></div>
+
+<div class="container">
+  <span class="mono">// sys.status: building_artifacts</span>
+
+  <h1>Незабаром:<br><span class="highlight">Networking</span></h1>
+
+  <div class="loader">
+    <div class="loader-fill"></div>
+  </div>
+
+  <div class="status-box">
+    <div class="dot"></div>
+    <span class="status-text">Завантаження презентації...</span>
+  </div>
+</div>
+
+</body>
+</html>

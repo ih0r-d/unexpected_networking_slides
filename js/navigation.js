@@ -43,8 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
       document.body.style.setProperty('--scale-factor', scale);
     } else {
-      if (window.innerWidth < 1280) {
-        const scale = window.innerWidth / 1280;
+      const availableWidth = document.documentElement.clientWidth || window.innerWidth;
+      if (availableWidth < 1280) {
+        // Add a small buffer (20px) to ensure no trimming at edges
+        const scale = (availableWidth - 20) / 1280;
         document.body.style.setProperty('--scale-factor', scale);
       } else {
         document.body.style.removeProperty('--scale-factor');

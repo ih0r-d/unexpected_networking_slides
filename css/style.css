@@ -1679,17 +1679,24 @@ h2.slide-title.solution {
   body:not(.fullscreen-mode) {
     overflow-x: hidden;
     width: 100%;
+    position: relative;
   }
 
   body:not(.fullscreen-mode) .slide {
+    /* Center the slide relative to the viewport center */
+    position: relative;
+    left: 50%;
+    margin-left: -640px; /* Half of 1280px */
+    
     /* Scale down to fit the screen width */
     transform: scale(var(--scale-factor, 1));
-    /* Origin at top center keeps it centered horizontally */
     transform-origin: top center;
+
     /* Adjust margin-bottom to remove the gap created by scaling */
     /* Formula: OriginalMargin - (OriginalHeight - ScaledHeight) */
     /* Original Height: 720px */
     /* Original Margin: 50px */
-    margin-bottom: calc(50px - (720px * (1 - var(--scale-factor, 1))));
+    /* We add 20px extra spacing */
+    margin-bottom: calc(50px - (720px * (1 - var(--scale-factor, 1))) + 20px);
   }
 }

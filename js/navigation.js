@@ -37,12 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateScale() {
-    if (!document.body.classList.contains('fullscreen-mode')) {
-      document.body.style.removeProperty('--scale-factor');
-      return;
+    const isFullscreen = document.body.classList.contains('fullscreen-mode');
+    
+    if (isFullscreen) {
+      const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+      document.body.style.setProperty('--scale-factor', scale);
+    } else {
+      if (window.innerWidth < 1280) {
+        const scale = window.innerWidth / 1280;
+        document.body.style.setProperty('--scale-factor', scale);
+      } else {
+        document.body.style.removeProperty('--scale-factor');
+      }
     }
-    const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
-    document.body.style.setProperty('--scale-factor', scale);
   }
 
   function scrollToSlide(index) {
@@ -117,18 +124,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('fullscreenchange', () => {
     if (document.fullscreenElement) {
       document.body.classList.add('fullscreen-mode');
-      updateScale();
-      window.addEventListener('resize', updateScale);
-      // Ensure current slide is active and visible immediately
       updateActiveSlideClass(); 
     } else {
       document.body.classList.remove('fullscreen-mode');
-      window.removeEventListener('resize', updateScale);
       // Re-align scroll position to current slide when exiting
       setTimeout(() => scrollToSlide(currentSlideIndex), 100);
     }
+    updateScale();
   });
 
   // Initial setup
+  window.addEventListener('resize', updateScale);
+  updateScale();
   updateCurrentSlideIndex();
 });

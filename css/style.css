@@ -1673,3 +1673,23 @@ h2.slide-title.solution {
   color: var(--slate);
   opacity: 0.5;
 }
+
+/* Responsive / Mobile Styles */
+@media screen and (max-width: 1280px) {
+  body:not(.fullscreen-mode) {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body:not(.fullscreen-mode) .slide {
+    /* Scale down to fit the screen width */
+    transform: scale(var(--scale-factor, 1));
+    /* Origin at top center keeps it centered horizontally */
+    transform-origin: top center;
+    /* Adjust margin-bottom to remove the gap created by scaling */
+    /* Formula: OriginalMargin - (OriginalHeight - ScaledHeight) */
+    /* Original Height: 720px */
+    /* Original Margin: 50px */
+    margin-bottom: calc(50px - (720px * (1 - var(--scale-factor, 1))));
+  }
+}

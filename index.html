@@ -118,6 +118,9 @@
         <p class="font-w800">Polyglot without barriers</p>
       </div>
     </div>
+    <div class="slide-footer-link">
+      <a href="https://github.com/ih0r-d/polyglot-without-bariers" target="_blank">github.com/ih0r-d/polyglot-without-bariers</a>
+    </div>
   </div>
   <div class="slide-number"></div>
 </div>
@@ -214,18 +217,18 @@
 <div class="slide">
   <h2 class="slide-title">Захоплення</h2>
   <div class="content-area center-all">
-    <div class="code-loop-container">
-      <div class="code-mega text-purple" style="font-size: 60px;">
-        while (<span class="text-dark">interest</span> > <span class="text-dark">pragmatism</span>) {
+    <div class="code-panel">
+      <div class="code-line">
+        <span class="text-purple">while</span> (<span class="text-dark">interest</span> > <span class="text-dark">pragmatism</span>) {
       </div>
-      <div class="code-mega text-slate" style="font-size: 40px; margin-left: 60px; margin-top: 20px;">
-        // nights & weekends
+      <div class="code-line" style="margin-left: 40px;">
+        <span class="text-slate">// nights & weekends</span>
       </div>
-      <div class="code-mega text-lime" style="font-size: 60px; margin-left: 60px;">
-        commit();
+      <div class="code-line" style="margin-left: 40px;">
+        <span class="text-lime">commit</span>();
       </div>
-      <div class="code-mega text-purple" style="font-size: 60px;">
-        }
+      <div class="code-line">
+        <span class="text-purple">}</span>
       </div>
     </div>
   </div>
@@ -271,91 +274,41 @@
           <span class="roadmap-duration">~1.5 роки</span>
         </div>
 
-        <div class="milestone">
+        <div class="milestone fragment">
           <h4>Стабілізація Core</h4>
           <p>Повна підтримка GraalPy контекстів та ізоляції компонентів.</p>
         </div>
 
-        <div class="milestone">
+        <div class="milestone fragment">
           <h4>Розширення екосистеми</h4>
           <p>Адаптери для популярних Java-фреймворків та спрощення конфігурацій.</p>
         </div>
 
-        <div class="milestone">
+        <div class="milestone fragment">
           <h4>Інструменти розробника</h4>
           <p>Покращення DX: логування, дебаг та візуалізація взаємодії.</p>
         </div>
       </div>
 
       <!-- Права колонка: Цикл досвіду -->
-      <div class="loop-container">
+      <div class="loop-container fragment">
         <div class="loop-box box-contribution">
           <i class="fa-solid fa-code-branch icon-contribution"></i>
           <p><b>Контриб'ютинг та дослідження</b></p>
-          <p class="text-small">Продовження внеску в екосистему GraalVM. Дослідження внутрішніх механізмів та покращення існуючих фіч.</p>
+          <p class="text-small">Продовження внеску в екосистему GraalVM.</p>
         </div>
         <div class="loop-box box-library">
           <i class="fa-solid fa-box-archive icon-library"></i>
           <p><b>Розвиток polyglot-adapter</b></p>
-          <p class="text-small">Покращення можливостей бібліотеки після детального вивчення технологій та впровадження нових підходів.</p>
+          <p class="text-small">Покращення можливостей бібліотеки.</p>
         </div>
 
-        <h3 class="main-decision">Я просто <b class="text-purple font-w800">пішов далі.</b></h3>
+        <h3 class="main-decision fragment">Я просто <b class="text-purple font-w800">пішов далі.</b></h3>
       </div>
     </div>
   </div>
 
   <div class="footer-code">// git push --force-interest</div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Середовище</h2>
-  <div class="content-area center-all pos-relative">
-    <div class="env-glow"></div>
-    <div class="env-label">Lviv JavaClub</div>
-    <div class="env-label">Twitter / X</div>
-    <div class="env-label">Local Meetups</div>
-    <div class="env-label">Open Source</div>
-    <div class="dots-grid">
-      <div class="dot"></div>
-      <div class="dot active"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot active"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot active"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot active"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot focus"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot active"></div>
-      <div class="dot active"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot active"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-    </div>
-    <h2 class="fs-52 font-w200 text-dark letter-spacing-neg-1">
-      Я був <b class="font-w700 text-purple">не один.</b>
-    </h2>
-    <p class="mono mt-40 fs-20 opacity-60">// context: tech_community</p>
-  </div>
   <div class="slide-number"></div>
 </div>
 
@@ -423,16 +376,12 @@
 <div class="slide">
   <!-- Minimalist Realization Slide -->
   <div class="content-area center-all">
-    <div class="code-mega text-slate opacity-40" style="font-size: 50px;">
-      return_value
-    </div>
-    
-    <div class="code-mega text-dark" style="font-size: 100px; margin: 20px 0;">
-      <span class="text-purple">&lt;</span>
-    </div>
-
-    <div class="code-mega text-purple" style="font-size: 80px;">
-      Side_Effect
+    <div class="code-panel">
+      <div class="code-line text-center" style="font-size: 60px;">
+        <span class="text-slate">return_value</span>
+        <span class="text-purple" style="margin: 0 30px;">&lt;</span>
+        <span class="text-lime font-w700">Side_Effect</span>
+      </div>
     </div>
 
     <p class="mt-60 font-inter fs-24 italic opacity-60">
@@ -490,6 +439,7 @@
                alt="LinkedIn QR">
         </div>
         <p class="font-w800">LinkedIn</p>
+        <a href="https://www.linkedin.com/in/ididyk" target="_blank" class="qr-link">linkedin.com/in/ididyk</a>
       </div>
       <!-- GitHub -->
       <div class="qr-item">
@@ -499,6 +449,7 @@
               alt="GitHub QR">
         </div>
         <p class="font-w800">Polyglot adapter repository</p>
+        <a href="https://github.com/ih0r-d/polyglot-adapter" target="_blank" class="qr-link">github.com/ih0r-d/polyglot-adapter</a>
       </div>
       <!-- Community -->
       <div class="qr-item">
@@ -507,6 +458,7 @@
                alt="Community QR">
         </div>
         <p class="font-w800">Litcoders</p>
+        <a href="https://t.me/+H9bkRklQQhowZjgy" target="_blank" class="qr-link">t.me/+H9bkRklQQhowZjgy</a>
       </div>
     </div>
   </div>

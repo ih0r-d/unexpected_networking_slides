@@ -1389,7 +1389,7 @@ h2.slide-title.solution {
 /* Reactions: JSON Log */
 .json-block {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 36px;
+  font-size: 24px;
   line-height: 1.6;
   color: var(--dark);
   text-align: left;
@@ -1398,6 +1398,61 @@ h2.slide-title.solution {
 .json-key { color: var(--purple); }
 .json-string { color: #16a34a; } /* Green */
 .json-null { color: var(--red); font-weight: 700; }
+
+/* QR Links */
+.qr-link {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--purple);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  word-break: break-all;
+}
+
+.qr-link:hover {
+  text-decoration: underline;
+}
+
+/* Slide Footer Link */
+.slide-footer-link {
+  margin-top: 20px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+}
+
+.slide-footer-link a {
+  color: var(--purple);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--purple);
+}
+
+/* Code Panel (styled like Slide 11) */
+.code-panel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: left;
+  width: 100%;
+  max-width: 900px;
+  color: #e2e8f0;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+/* Fragments for Animation */
+.fragment {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease-out;
+}
+
+.fragment.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* Stop: Return Statement */
 .code-return {

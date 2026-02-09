@@ -64,6 +64,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function handleNext() {
+    const currentSlide = slides[currentSlideIndex];
+    const hiddenFragments = currentSlide.querySelectorAll('.fragment:not(.visible)');
+    if (hiddenFragments.length > 0) {
+      hiddenFragments[0].classList.add('visible');
+    } else {
+      scrollToSlide(currentSlideIndex + 1);
+    }
+  }
+
+  function handlePrev() {
+    const currentSlide = slides[currentSlideIndex];
+    const visibleFragments = currentSlide.querySelectorAll('.fragment.visible');
+    if (visibleFragments.length > 0) {
+      visibleFragments[visibleFragments.length - 1].classList.remove('visible');
+    } else {
+      scrollToSlide(currentSlideIndex - 1);
+    }
+  }
+
   document.addEventListener('keydown', (e) => {
     if (!document.body.classList.contains('fullscreen-mode')) {
         updateCurrentSlideIndex();
@@ -76,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'Enter':
       case 'PageDown':
         e.preventDefault();
-        scrollToSlide(currentSlideIndex + 1);
+        handleNext();
         break;
       
       case 'ArrowLeft':
@@ -84,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'Backspace':
       case 'PageUp':
         e.preventDefault();
-        scrollToSlide(currentSlideIndex - 1);
+        handlePrev();
         break;
 
       case 'f':

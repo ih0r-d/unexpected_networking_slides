@@ -1939,3 +1939,25 @@ h2.slide-title.solution {
     padding: 20px;
   }
 }
+/* LinkedIn Comment Card Style - Added from draft.html */
+.comment-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+  text-align: left;
+  max-width: 900px;
+  position: relative;
+  margin: 0 auto;
+}
+.comment-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.avatar { width: 50px; height: 50px; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--slate); font-weight: 900; font-size: 18px; overflow: hidden; }
+.avatar i { font-size: 24px; color: #94a3b8; }
+.comment-author { font-weight: 800; color: var(--dark); font-size: 22px; }
+.comment-meta { font-weight: 400; font-size: 14px; opacity: 0.6; display: block; margin-top: 2px; }
+.comment-body { font-size: 24px; line-height: 1.4; color: #1e293b; }
+.mention { color: #0a66c2; font-weight: 700; text-decoration: none; }
+.comment-body b { color: var(--dark); font-weight: 700; }
+
+.ln-logo { position: absolute; top: 30px; right: 30px; color: #0a66c2; font-size: 24px; opacity: 0.3; }

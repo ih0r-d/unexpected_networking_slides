@@ -106,6 +106,24 @@ h2.slide-title {
   color: var(--dark);
 }
 
+.go-slide-content {
+  transform: translateY(-24px);
+}
+
+.go-slide-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 92px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -3px;
+  color: var(--dark);
+  margin-top: 12px;
+}
+
+.go-slide-separator {
+  margin-top: 28px;
+}
+
 p, li {
   font-size: 28px;
   line-height: 1.5;
@@ -2228,6 +2246,21 @@ h2.slide-title.solution {
   justify-content: center;
   gap: 40px;
   margin: 40px 0;
+}
+
+.demo-python {
+  order: 1;
+}
+
+.flow-middle {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  order: 2;
+}
+
+.demo-java {
+  order: 3;
 }
 
 .code-pill {

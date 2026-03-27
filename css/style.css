@@ -2240,6 +2240,11 @@ h2.slide-title.solution {
   opacity: 0.3;
 }
 
+.comment-muted {
+  opacity: 0.45;
+  filter: blur(1.6px);
+}
+
 .flow-container {
   display: flex;
   align-items: center;

@@ -261,21 +261,21 @@
       <div class="session-step fragment">
         <div class="step-icon"><i class="fa-solid fa-lightbulb"></i></div>
         <div class="step-content">
-          <span class="step-tag">Phase 1: UX Realization</span>
+          <span class="step-tag">Етап 1: Незручний API</span>
           "Демка працює, але API — крінж. Я б сам таке не використовував."
         </div>
       </div>
       <div class="session-step fragment">
         <div class="step-icon active"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
         <div class="step-content">
-          <span class="step-tag">Phase 2: Spring Boot Magic</span>
+          <span class="step-tag">Етап 2: Відчуття нативності</span>
           "Хочу `@EnablePolyglot` та авто-конфігурацію. Щоб відчувалося як рідне."
         </div>
       </div>
       <div class="session-step fragment">
         <div class="step-icon"><i class="fa-solid fa-hourglass-half"></i></div>
         <div class="step-content">
-          <span class="step-tag">Phase 3: The Reality</span>
+          <span class="step-tag">Етап 3: Реальність</span>
           Десятки годин на боротьбу з GraalVM Contexts та динамічними проксі.
         </div>
       </div>
@@ -283,7 +283,7 @@
         <div class="step-icon active step-icon-success"><i
             class="fa-solid fa-box-archive"></i></div>
         <div class="step-content">
-          <span class="step-tag step-tag-success">Final State</span>
+          <span class="step-tag step-tag-success">Фінальний стан</span>
           <b>v0.0.14 released on Maven Central. Magic included.</b>
         </div>
       </div>
@@ -366,11 +366,19 @@
         </div>
       </div>
       <div class="comment-body">
-        <span class="mention">Ihor Didyk</span> why would anyone use this? If you have a python service and you need the
-        output in java service just use <b>GRPC or REST</b>. + it males a way for micro service architecture which it
-        the standard for big services. <br><br>
-        It seems to me that your solution brings <b>unnecessary bloat</b> and enforces unwanted architecture. Am I
-        missing something?
+        <span class="mention">Ihor Didyk</span>
+        <span class="comment-muted">why would anyone use this? If you have a</span>
+        <b>python service</b>
+        <span class="comment-muted">and you need the output in</span>
+        <b>java service</b>
+        <span class="comment-muted">just use</span>
+        <b>gRPC or REST</b>.
+        <span class="comment-muted">+ it makes a way for micro service architecture which is the standard for big services.</span>
+        <br><br>
+        <span class="comment-muted">It seems to me that your solution brings</span>
+        <b>unnecessary bloat</b>
+        <span class="comment-muted">and enforces unwanted architecture.</span>
+        <b>Am I missing something?</b>
       </div>
     </div>
   </div>
@@ -383,7 +391,7 @@
   <div class="content-area center-all">
     <div class="result-comparison architecture-comparison">
       <div class="result-list architecture-column fragment">
-        <h4>REST / gRPC</h4>
+        <h4>Коли сервіс доречний</h4>
         <ul>
           <li><i class="fa-solid fa-network-wired text-purple"></i><span>Окремий деплой</span></li>
           <li><i class="fa-solid fa-globe text-purple"></i><span>Мережеві межі</span></li>
@@ -392,7 +400,7 @@
       </div>
 
       <div class="result-list architecture-column architecture-column-accent fragment">
-        <h4>Embed-підхід</h4>
+        <h4>Коли embed логічний</h4>
         <ul>
           <li><i class="fa-solid fa-bolt text-lime"></i><span>Локальний виклик без network overhead</span></li>
           <li><i class="fa-solid fa-database text-lime"></i><span>Обмін даними без зайвої серіалізації</span></li>
@@ -402,7 +410,7 @@
     </div>
 
     <p class="architecture-note fragment">
-      Як пояснити розробнику, що не кожній задачі потрібен <b>окремий сервіс та мережевий оверхед?</b>
+      Не кожна інтеграція має ставати <b>distributed system.</b>
     </p>
   </div>
   <div class="slide-number"></div>
@@ -722,7 +730,7 @@
 </div>
 
 <div class="slide">
-  <h2 class="slide-title">Keep in touch</h2>
+  <h2 class="slide-title">На зв'язку</h2>
   <div class="content-area">
     <div class="qr-grid-custom">
       

@@ -1,807 +1,449 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Networking: Unplanned</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@200;800&family=JetBrains+Mono:wght@400&display=swap"
-      rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Networking, якого я не планував — coming soon countdown" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:title" content="Networking, якого я не планував" />
+  <meta property="og:description" content="Далі більше. Наступний синк — 30 липня о 19:00." />
+  <meta property="og:type" content="website" />
+
+  <title>Networking — Coming Soon</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --faint: #94a3b8;
+      --line: #e2e8f0;
+      --line-strong: #cbd5e1;
+      --panel: rgba(248, 250, 252, 0.84);
+      --purple: #8b5cf6;
+      --purple-strong: #7c3aed;
+      --purple-soft: rgba(139, 92, 246, 0.12);
+      --shadow: 0 28px 90px rgba(15, 23, 42, 0.10);
+      --radius: 30px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      min-height: 100%;
+      color-scheme: light;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 3vw, 42px);
+    }
+
+    .noise,
+    .grid,
+    .orb {
+      position: fixed;
+      pointer-events: none;
+    }
+
+    .grid {
+      inset: 0;
+      z-index: -3;
+      background-image: radial-gradient(#dbe3ee 1.45px, transparent 1.45px);
+      background-size: clamp(42px, 5vw, 78px) clamp(42px, 5vw, 78px);
+      opacity: 0.72;
+    }
+
+    .orb {
+      z-index: -2;
+      width: 58vmin;
+      height: 58vmin;
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      background:
+          radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.22), transparent 64%),
+          radial-gradient(circle at 44% 60%, rgba(124, 58, 237, 0.14), transparent 58%);
+      filter: blur(10px);
+    }
+
+    .noise {
+      inset: 0;
+      z-index: -1;
+      opacity: 0.28;
+      background-image:
+          linear-gradient(115deg, transparent 0%, rgba(139, 92, 246, 0.06) 34%, transparent 62%),
+          linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0.88));
+    }
+
+    .page {
+      width: min(100%, 980px);
+      display: grid;
+      gap: clamp(28px, 4.2vw, 56px);
+      text-align: center;
+    }
+
+    .meta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.72rem, 1.3vw, 0.92rem);
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--purple);
+      animation: fadeUp 650ms ease both;
+    }
+
+    .meta::before,
+    .meta::after {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple));
+      opacity: 0.65;
+    }
+
+    .meta::after {
+      background: linear-gradient(90deg, var(--purple), transparent);
+    }
+
+    .hero-title {
+      font-size: clamp(3.6rem, 12vw, 8.4rem);
+      line-height: 0.78;
+      font-weight: 900;
+      letter-spacing: -0.085em;
+      text-transform: uppercase;
+      animation: fadeUp 650ms 90ms ease both;
+    }
+
+    .event-card {
+      position: relative;
+      width: min(100%, 770px);
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      padding: clamp(34px, 5vw, 56px) clamp(22px, 5vw, 60px);
+      overflow: hidden;
+      isolation: isolate;
+      animation: fadeUp 650ms 180ms ease both;
+    }
+
+    .event-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px auto -1px -1px;
+      width: 18px;
+      background: linear-gradient(180deg, var(--purple), #a78bfa, var(--purple-strong));
+      border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow: 0 0 34px rgba(139, 92, 246, 0.35);
+    }
+
+    .event-card::after {
+      content: "event://networking-sync";
+      position: absolute;
+      right: 22px;
+      top: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(100, 116, 139, 0.38);
+    }
+
+    .event-title {
+      font-size: clamp(1.7rem, 4vw, 2.65rem);
+      line-height: 1.04;
+      font-weight: 850;
+      letter-spacing: -0.055em;
+    }
+
+    .event-subtitle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+      color: var(--purple);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(1rem, 2.1vw, 1.35rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .event-subtitle::before {
+      content: "—";
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(96px, 1fr));
+      gap: clamp(18px, 3vw, 38px);
+      width: min(100%, 620px);
+      margin: 0 auto;
+      animation: fadeUp 650ms 270ms ease both;
+    }
+
+    .time-item {
+      min-width: 0;
+    }
+
+    .time-val {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(2.8rem, 6.5vw, 5rem);
+      line-height: 0.86;
+      font-weight: 600;
+      letter-spacing: -0.09em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .time-label {
+      display: block;
+      margin-top: 16px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.72rem, 1.4vw, 0.92rem);
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .system-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: -8px;
+      color: var(--faint);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      animation: fadeUp 650ms 360ms ease both;
+    }
+
+    .system-line::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--purple);
+      box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
+      animation: pulse 1.9s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.45); }
+      72% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        overflow: auto;
+      }
+
+      .page {
+        gap: 30px;
+      }
+
+      .meta {
+        letter-spacing: 0.14em;
+        gap: 8px;
+      }
+
+      .meta::before,
+      .meta::after {
+        width: 18px;
+      }
+
+      .hero-title {
+        font-size: clamp(3.2rem, 17vw, 5.6rem);
+        letter-spacing: -0.075em;
+      }
+
+      .event-card {
+        border-radius: 24px;
+        padding: 36px 22px 34px;
+      }
+
+      .event-card::before {
+        width: 11px;
+      }
+
+      .event-card::after {
+        display: none;
+      }
+
+      .countdown {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      .time-val {
+        font-size: clamp(2.15rem, 13vw, 4rem);
+      }
+
+      .time-label {
+        margin-top: 12px;
+        font-size: 0.62rem;
+        letter-spacing: 0.13em;
+      }
+    }
+
+    @media (max-width: 440px) {
+      body {
+        padding: 18px 12px;
+      }
+
+      .page {
+        gap: 26px;
+      }
+
+      .meta {
+        font-size: 0.64rem;
+      }
+
+      .event-title {
+        font-size: clamp(1.55rem, 9vw, 2.1rem);
+      }
+
+      .event-subtitle {
+        margin-top: 18px;
+        font-size: 0.95rem;
+      }
+
+      .countdown {
+        gap: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 <body>
+<div class="grid" aria-hidden="true"></div>
+<div class="orb" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
 
-<div class="slide slide-title-bg">
-  <div class="mesh-bg mesh-bg-hidden"></div>
-  <div class="content-area">
-    <p class="mono mb-20">// stack trace: unexpected_networking</p>
-    <h1>Networking,<br><span class="text-purple">якого я не планував</span></h1>
-    <div class="separator-lime"></div>
-  </div>
-  <div class="slide-author text-dark">@ihordidyk</div>
-</div>
+<main class="page" aria-label="Сторінка очікування події">
+  <div class="meta">// July 30 • 19:00 • Next Sync</div>
 
-<div class="slide">
-  <div class="mesh-bg opacity-10"></div>
-  <h2 class="slide-title">Хто я?</h2>
-  <div class="two-column">
-    <ul class="checklist">
-      <li>
-        <i class="fa-regular fa-square-check"></i>
-        <span><b>Senior Software Engineer</b> at <span id="company">Pwrteams</span></span>
-      </li>
-      <li>
-        <i class="fa-regular fa-square-check"></i>
-        <span>Open Source Contributor<br>
-          <span class="info-tag">(GraalVM ecosystem)</span>
-        </span>
-      </li>
-      <li>
-        <i class="fa-regular fa-square-check"></i>
-        <span>Speaker на івентах<br>
-          <span class="info-tag">(Lviv JavaClub, CoffeeJUG, Litcoders)</span>
-        </span>
-      </li>
-      <li>
-        <i class="fa-regular fa-square-check"></i>
-        <span>Автор <b>polyglot-platform</b> бібліотеки<br>
-          <span class="later-tag">// про це трохи пізніше...</span>
-        </span>
-      </li>
-    </ul>
-    <div class="photo-box">
-      <img src="images/myself.png" alt="My Photo">
+  <h1 class="hero-title">Незабаром</h1>
+
+  <section class="event-card" aria-label="Назва події">
+    <h2 class="event-title">Networking, якого я не планував</h2>
+    <p class="event-subtitle">Далі більше</p>
+  </section>
+
+  <section class="countdown" id="timer" aria-label="Зворотний відлік" aria-live="polite">
+    <div class="time-item">
+      <span class="time-val" id="days">00</span>
+      <span class="time-label">днів</span>
     </div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide disclaimer-slide">
-  <div class="content-area">
-    <div class="fragment disclaimer-easter-egg">
-      <i class="fa-solid fa-puzzle-piece disclaimer-easter-egg-icon"></i>
-      <p class="disclaimer-easter-egg-text">P.S. У цій презентації є пасхалка.</p>
+    <div class="time-item">
+      <span class="time-val" id="hours">00</span>
+      <span class="time-label">годин</span>
     </div>
-    <h2 class="disclaimer-title">Disclaimer</h2>
-    <p class="disclaimer-text">Тут не буде порад, як «продавати себе»</p>
-    <p class="disclaimer-footer">
-      Це історія про те, як <b class="font-w700 text-purple">нетворкінг стає побічним ефектом</b> підготовки до
-      вебінару.
-    </p>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <div class="mesh-bg opacity-10"></div>
-  <div class="content-area center-all justify-center go-slide-content">
-    <p class="mono">/// init_story()</p>
-    <h2 class="go-slide-title">Поїхали?</h2>
-    <div class="separator-lime-small go-slide-separator"></div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <div class="mesh-bg mesh-bg-lime-custom"></div>
-  <div class="content-area center-all justify-center">
-    <div class="dot-origin dot-origin-lg"></div>
-    <p class="mono mono-origin">// point\_of\_origin</p>
-    <h2 class="font-w300 text-dark font-inter origin-title">
-      Все починалося з підготовки до вебінару в комюніті <b class="font-w700 text-purple">Litcoders</b>
-    </h2>
-    <div class="separator-lime-small separator-lime-small-spaced"></div>
-  </div>
-  <div class="hidden-return hidden-return-origin">"SI"</div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">План був простий</h2>
-  <div class="content-area">
-    <div class="two-column">
-      <ul class="checklist">
-        <li class="fragment">
-          <i class="fa-regular fa-square"></i>
-          <span>Показати можливості <b>GraalVM & GraalPy</b></span>
-        </li>
-        <li class="fragment">
-          <i class="fa-regular fa-square"></i>
-          <span><b>Реалізувати</b> безшовний запуск Python-скриптів прямо з-під JVM</span>
-        </li>
-        <li class="fragment">
-          <i class="fa-regular fa-square"></i>
-          <span><b>Забезпечити</b> прямий обмін даними між мовами без зайвої серіалізації</span>
-        </li>
-        <li class="fragment">
-          <i class="fa-regular fa-square"></i>
-          <span><b>Створити</b> високорівневу абстракцію для спрощення входу в GraalPy</span>
-        </li>
-      </ul>
-
-      <div class="qr-item fragment">
-        <div class="qr-placeholder-custom">
-          <img
-              src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/ih0r-d/polyglot-without-bariers"
-              alt="Project QR">
-        </div>
-        <p class="text-center qr-link-line"><a
-            href="https://github.com/ih0r-d/polyglot-without-bariers" target="_blank" class="qr-link text-purple">https://github.com/ih0r-d/polyglot-without-bariers</a></p>
-      </div>
+    <div class="time-item">
+      <span class="time-val" id="minutes">00</span>
+      <span class="time-label">хвилин</span>
     </div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Демка: The Artifact</h2>
-  <div class="content-area center-all">
-    <div class="flow-container">
-      
-      <div class="anim-slide-in-left fragment demo-endpoint demo-python">
-        <i class="fa-brands fa-python demo-icon demo-icon-python"></i>
-        <div class="code-pill">Guest Language<br>Bindings</div>
-      </div>
-
-      <div class="anim-slide-in-right fragment demo-endpoint demo-java">
-        <i class="fa-brands fa-java demo-icon demo-icon-java"></i>
-        <div class="code-pill output-pill">Type-safe JVM<br>Logic</div>
-      </div>
-
-      <div class="flow-middle">
-        <div class="anim-fade-in-1 fragment flow-arrow">
-          <i class="fa-solid fa-arrow-right-arrow-left"></i>
-        </div>
-
-        <div class="abstraction-box anim-pop-in fragment">
-          <i class="fa-solid fa-layer-group abstraction-icon"></i>
-          <div class="abs-label">POLYGLOT PLATFORM</div>
-          <div class="abs-status abs-status-detail">
-            Validating Types...<br>Resolving Methods...
-          </div>
-        </div>
-
-        <div class="anim-fade-in-2 fragment flow-arrow">
-          <i class="fa-solid fa-arrow-right-arrow-left"></i>
-        </div>
-      </div>
+    <div class="time-item">
+      <span class="time-val" id="seconds">00</span>
+      <span class="time-label">секунд</span>
     </div>
-    <p class="mapping-caption fragment">
-      Мапінг стає <span class="mapping-accent">контрактом</span>: типізація без рутини.
-    </p>
-  </div>
-  <div class="hidden-return hidden-return-demo">"G"</div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Реакції</h2>
-  <div class="content-area center-all">
-    <div class="log-stream">
-      <div class="log-entry">
-        <span class="log-time">18:30:00</span>
-        <span class="log-level info">START</span>
-        <span class="log-msg">Started talk: "Networking, якого не планував"</span>
-      </div>
-      <div class="log-entry">
-        <span class="log-time">19:00:00</span>
-        <span class="log-level info">INFO</span>
-        <span class="log-msg">Talk finished successfully.</span>
-      </div>
-      <div class="log-entry">
-        <span class="log-time">19:05:00</span>
-        <span class="log-level warn">WARN</span>
-        <span class="log-msg">Total silence in the room... networking: null</span>
-      </div>
-      <div class="log-entry highlight log-entry-soft">
-        <span class="log-time">19:10:15</span>
-        <span class="log-level event">Q&A</span>
-        <span class="log-msg"><b>"А як це працює з власними Python-пакетами?"</b></span>
-      </div>
-      <div class="log-entry highlight">
-        <span class="log-time">19:20:01</span>
-        <span class="log-level ok">OK</span>
-        <span class="log-msg"><b>Connection Established. Deep technical discussion started.</b></span>
-      </div>
-    </div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Тригер</h2>
-  <div class="content-area center-all">
-    <div class="log-stream trigger-log-stream">
-      <div class="log-entry trigger-log-entry trigger-log-entry-muted">
-        <span class="log-time">19:10:09</span>
-        <span class="log-level info">INFO</span>
-        <span class="log-msg">Room switched from passive listening to technical Q&amp;A.</span>
-      </div>
-      <div class="log-entry trigger-log-entry highlight">
-        <span class="log-time">19:10:15</span>
-        <span class="log-level event">Q&A</span>
-        <span class="log-msg">
-          <b>"Як бути з кастомними пакетами, які сам розробляєш та білдаєш на PyPI?"</b>
-        </span>
-      </div>
-      <div class="log-entry trigger-log-entry trigger-log-entry-muted">
-        <span class="log-time">19:10:18</span>
-        <span class="log-level ok">OK</span>
-        <span class="log-msg">The topic landed on a real engineering use case.</span>
-      </div>
-    </div>
-    <p class="trigger-note fragment">
-      Це <b>технічне питання</b> показало, що тема реально зачепила.
-    </p>
-  </div>
-  <div class="hidden-return hidden-return-trigger">"N"</div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide bg-dark text-white">
-  <div class="content-area center-all">
-    <div class="code-return code-return-light">
-      return<span class="code-semicolon code-semicolon-lime">;</span>
-    </div>
-    <h2 class="fs-48 font-w200 mt-40">
-      Тут можна було <b class="font-w700 text-lime">закінчити.</b>
-    </h2>
-    <p class="mt-20 fs-24 exit-code-note">(Exit Code: 0)</p>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Демка перестала бути демкою</h2>
-  <div class="content-area center-all justify-start">
-    <div class="session-card">
-      <div class="session-step fragment">
-        <div class="step-icon"><i class="fa-solid fa-lightbulb"></i></div>
-        <div class="step-content">
-          <span class="step-tag">Етап 1: Незручний API</span>
-          "Демка працює, але API — крінж. Я б сам таке не використовував."
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon active"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <div class="step-content">
-          <span class="step-tag">Етап 2: Відчуття нативності</span>
-          "Хочу `@EnablePolyglot` та авто-конфігурацію. Щоб відчувалося як рідне."
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon"><i class="fa-solid fa-hourglass-half"></i></div>
-        <div class="step-content">
-          <span class="step-tag">Етап 3: Реальність</span>
-          Десятки годин на боротьбу з GraalVM Contexts та динамічними проксі.
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon active step-icon-success"><i
-            class="fa-solid fa-box-archive"></i></div>
-        <div class="step-content">
-          <span class="step-tag step-tag-success">Фінальний стан</span>
-          <b>v0.0.14 released on Maven Central. Magic included.</b>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Точка зламу</h2>
-  <div class="content-area center-all">
-    <h3 class="breakpoint-title">
-      Це був момент вибору: <br>
-      <b>зупинитися</b> чи <b>піти далі?</b>
-    </h3>
-
-    <div class="internal-check-box">
-      <div class="mono internal-check-copy">
-        <span class="internal-check-label">// Internal state check:</span><br>
-        pet_project <span class="internal-check-operator">!=</span> open_source_library
-      </div>
-    </div>
-
-    <p class="breakpoint-note fragment">
-      Але саме тоді почалася <b>справжня перевірка ідеї.</b>
-    </p>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Поза межами демки</h2>
-  <div class="content-area center-all justify-start">
-    <div class="session-card">
-      <div class="session-step fragment">
-        <div class="step-icon"><i class="fa-solid fa-code"></i></div>
-        <div class="step-content">
-          <span class="step-tag">Покращення API</span>
-          Перехід від "просто працює" до строгої типізації та зручних анотацій.
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon active"><i class="fa-solid fa-rocket"></i></div>
-        <div class="step-content">
-          <span class="step-tag">Spring Boot Starter</span>
-          Реалізація автоконфігурації для Maven Central. Робимо бібліотеку доступною для всіх.
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon active step-icon-success"><i
-            class="fa-solid fa-check-double"></i></div>
-        <div class="step-content">
-          <span class="step-tag step-tag-success">Oracle GraalVM Review</span>
-          <b>Oracle Team порев'ювали лібу.</b> Отримано експертний фідбек та валідацію архітектури від авторів
-          технології.
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon"><i class="fa-brands fa-linkedin-in"></i></div>
-        <div class="step-content">
-          <span class="step-tag">LinkedIn: Build in Public</span>
-          Пости про хід розробки, архітектурні виклики та пошук рішень.
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">"Перший хейтер"?</h2>
-  <div class="content-area center-all">
-    <div class="comment-card">
-      <i class="fa-brands fa-linkedin ln-logo"></i>
-      <div class="comment-header">
-        <div class="avatar"><i class="fa-solid fa-user"></i></div>
-        <div class="comment-author">
-          Software Developer
-          <span class="comment-meta">Full-stack web development | Robotics | 3D modeling</span>
-        </div>
-      </div>
-      <div class="comment-body">
-        <span class="mention">Ihor Didyk</span>
-        <span class="comment-muted">why would anyone use this? If you have a</span>
-        <b>python service</b>
-        <span class="comment-muted">and you need the output in</span>
-        <b>java service</b>
-        <span class="comment-muted">just use</span>
-        <b>gRPC or REST</b>.
-        <span class="comment-muted">+ it makes a way for micro service architecture which is the standard for big services.</span>
-        <br><br>
-        <span class="comment-muted">It seems to me that your solution brings</span>
-        <b>unnecessary bloat</b>
-        <span class="comment-muted">and enforces unwanted architecture.</span>
-        <b>Am I missing something?</b>
-      </div>
-    </div>
-  </div>
-  <div class="hidden-return hidden-return-feedback">"A"</div>
-  <div class="slide-number">08</div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Не все має бути сервісом</h2>
-  <div class="content-area center-all">
-    <div class="result-comparison architecture-comparison">
-      <div class="result-list architecture-column fragment">
-        <h4>Коли сервіс доречний</h4>
-        <ul>
-          <li><i class="fa-solid fa-network-wired text-purple"></i><span>Окремий деплой</span></li>
-          <li><i class="fa-solid fa-globe text-purple"></i><span>Мережеві межі</span></li>
-          <li><i class="fa-solid fa-arrow-up-right-dots text-purple"></i><span>Distributed scaling</span></li>
-        </ul>
-      </div>
-
-      <div class="result-list architecture-column architecture-column-accent fragment">
-        <h4>Коли embed логічний</h4>
-        <ul>
-          <li><i class="fa-solid fa-bolt text-lime"></i><span>Локальний виклик без network overhead</span></li>
-          <li><i class="fa-solid fa-database text-lime"></i><span>Обмін даними без зайвої серіалізації</span></li>
-          <li><i class="fa-solid fa-box-open text-lime"></i><span>Один продукт, а не ще один сервіс</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="architecture-note fragment">
-      Не кожна інтеграція має ставати <b>distributed system.</b>
-    </p>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <div class="mesh-bg mesh-bg-solution"></div>
-
-  <h2 class="slide-title solution">Моя відповідь</h2>
-
-  <div class="content-area solution-content">
-    <div class="solution-timeline-container solution-timeline-offset">
-
-      <div class="solution-timeline-line fragment"></div> 
-
-      <div class="solution-timeline-items-wrapper">
-        
-        <div class="solution-timeline-item fragment anim-pop-in">
-          <div class="solution-timeline-content">
-            <h4 class="solution-step-title">
-              <i class="fa-solid fa-shield-halved solution-step-icon"></i>Стабілізація платформи
-            </h4>
-            <p class="solution-step-copy">Фокус на надійності та передбачуваності
-              polyglot-взаємодії.</p>
-          </div>
-        </div>
-
-        <div class="solution-timeline-item fragment anim-pop-in delay-300">
-          <div class="solution-timeline-content">
-            <h4 class="solution-step-title">
-              <i class="fa-solid fa-puzzle-piece solution-step-icon"></i>Розширення інтеграцій
-            </h4>
-            <p class="solution-step-copy">Підтримка популярних Java-екосистем та спрощення
-              старту.</p>
-          </div>
-        </div>
-
-        <div class="solution-timeline-item fragment anim-pop-in delay-600">
-          <div class="solution-timeline-content">
-            <h4 class="solution-step-title">
-              <i class="fa-solid fa-screwdriver-wrench solution-step-icon"></i>Developer tools
-            </h4>
-            <p class="solution-step-copy">Покращення DX: зрозумілий дебаг, логування та приклади.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="solution-loop-row">
-      <div class="loop-box box-contribution fragment anim-slide-in-left solution-loop-box delay-900">
-        <i class="fa-solid fa-code-branch icon-contribution"></i>
-        <p class="solution-loop-title"><b>Контриб'ютинг та дослідження</b></p>
-        <p class="text-small solution-loop-copy">Продовження внеску в екосистему GraalVM.</p>
-      </div>
-
-      <div class="loop-box box-library fragment anim-slide-in-right solution-loop-box delay-1200">
-        <i class="fa-solid fa-box-archive icon-library"></i>
-        <p class="solution-loop-title"><b>Розвиток polyglot-platform</b></p>
-        <p class="text-small solution-loop-copy">Покращення можливостей бібліотеки.</p>
-      </div>
-    </div>
-
-    <h3 class="main-decision fragment anim-pop-in solution-main-decision delay-1500">Найкращою <b
-        class="text-purple font-w800">відповіддю став розвиток.</b></h3>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">Що було насправді складним</h2>
-  <div class="content-area center-all justify-start">
-    <div class="session-card technical-depth-card">
-      <div class="session-step fragment">
-        <div class="step-icon"><i class="fa-solid fa-plug-circle-bolt"></i></div>
-        <div class="step-content">
-          <span class="step-tag">Lifecycle & Contexts</span>
-          Коли і як жити GraalVM Context, щоб не отримати витоки, дивну поведінку й болючі race conditions.
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon active"><i class="fa-solid fa-shuffle"></i></div>
-        <div class="step-content">
-          <span class="step-tag">Type Mapping</span>
-          Примітиви прості. Справжній біль починається на колекціях, кастомних типах і контрактах між мовами.
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
-        <div class="step-content">
-          <span class="step-tag">DX поверх магії</span>
-          Недостатньо, щоб воно “могло”. Воно має читатися як нормальний Spring Boot tooling, а не як експеримент.
-        </div>
-      </div>
-      <div class="session-step fragment">
-        <div class="step-icon active step-icon-success"><i class="fa-solid fa-box-archive"></i></div>
-        <div class="step-content">
-          <span class="step-tag step-tag-success">Packaging & Reuse</span>
-          Найціннішим виявилося не запустити демку, а запакувати рішення для повторного використання.
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide bg-dark">
-  <div class="community-bg"></div>
-  
-  <div class="noise-word noise-hype">HYPE</div>
-  <div class="noise-word noise-news">NEWS</div>
-  <div class="noise-word noise-trends">TRENDS</div>
-  <div class="noise-word noise-releases">RELEASES</div>
-  <div class="noise-word noise-drama">DRAMA</div>
-
-  <div class="content-area center-all">
-    <h2 class="fs-72 text-white font-w900 font-montserrat uppercase letter-spacing-5 text-center">
-      Комʼюніті — це фон
-    </h2>
-    <p class="text-purple font-mono mt-30 fs-20 letter-spacing-2">
-      INFRASTRUCTURE / NOISE / CONTEXT
-    </p>
-  </div>
-  <div class="hidden-return hidden-return-community">"L"</div>
-  <div class="slide-number"></div>
-</div>
-
-<!--
-<div class="slide">
-  <h2 class="slide-title">Ефект присутності</h2>
-  <div class="content-area center-all">
-    <div class="highlight-box">
-      <div class="mono async-code">
-        <span class="async-keyword">async function</span> <span class="async-strong">networking</span>() {
-        <br>
-        &nbsp;&nbsp;<span class="async-comment">// 1. Створюєш цінність (Sync)</span> <br>
-        &nbsp;&nbsp;<span class="async-keyword">const</span> artifact = createValue(); <br><br>
-        &nbsp;&nbsp;<span class="async-comment">// 2. Випускаєш у світ</span> <br>
-        &nbsp;&nbsp;<span class="async-keyword">await</span> broadcast(artifact); <br><br>
-        &nbsp;&nbsp;<span class="async-comment">// 3. Не блокуєшся. Працюєш далі.</span> <br>
-        &nbsp;&nbsp;<span class="async-keyword">return</span> listenForSignals(); <br>
-        }
-      </div>
-    </div>
-    <p class="async-note">Нетворкінг — це не робота. Це <b>асинхронна
-      функція.</b></p>
-  </div>
-  <div class="slide-number"></div>
-</div>
--->
-
-<div class="slide">
-
-  <h2 class="slide-title">Справжній результат</h2>
-
-  <div class="content-area center-all">
-    <div class="conclusion-layout">
-
-
-      <div class="fragment">
-        <p class="conclusion-lead">
-          В інженерії ми цінуємо <b>Return Value</b>.
-        </p>
-
-        <div class="side-effect-card return-card return-card-accent">
-
-          <div class="conclusion-icon conclusion-icon-return">
-            <i class="fa-solid fa-code"></i>
-          </div>
-
-          <div>
-            <div class="conclusion-label">
-              Return Value
-            </div>
-
-            <div class="conclusion-value">
-              polyglot-platform
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      
-
-      <div class="fragment conclusion-fragment-spaced">
-
-        <p class="conclusion-lead">
-          Але в житті перемагає <b>Side Effect</b>.
-        </p>
-
-        <div class="side-effect-card side-effect-ripple side-effect-card-accent">
-
-          <div class="conclusion-icon conclusion-icon-side-effect">
-            <i class="fa-solid fa-users-rays"></i>
-          </div>
-
-          <div>
-
-            <div class="conclusion-label">
-              Side Effect
-            </div>
-
-            <div class="conclusion-value conclusion-value-accent">
-              Unplanned Networking
-            </div>
-
-            
-
-            <div class="side-effect-chain">
-
-              <div class="fragment chain-item">
-                <i class="fa-solid fa-comment"></i>
-                conversation
-              </div>
-
-              <div class="fragment chain-arrow">→</div>
-
-              <div class="fragment chain-item">
-                <i class="fa-solid fa-user-group"></i>
-                connections
-              </div>
-
-              <div class="fragment chain-arrow">→</div>
-
-              <div class="fragment chain-item final">
-                <i class="fa-solid fa-rocket"></i>
-                opportunities
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <div class="slide-number"></div>
-
-</div>
-
-
-<!--
-<div class="slide">
-  <h2 class="slide-title">Рекурсія створення</h2>
-
-  <div class="content-area center-all">
-    <div class="recursion-layout">
-
-      <div class="recursion-visual">
-
-        <div class="recursion-ring"></div>
-
-        <i class="fa-solid fa-repeat recursion-repeat-icon"></i>
-
-        <div class="recursion-signal-dot"></div>
-
-      </div>
-
-      <div class="recursion-copy">
-
-        <h3 class="recursion-title">
-          Один артефакт<br>
-          <span class="recursion-title-accent">запускає наступний.</span>
-        </h3>
-
-        <p class="recursion-subtitle">
-          Це і є рекурсія створення.
-        </p>
-
-        <div class="recursion-chain">
-
-          <div class="fragment recursion-item">
-            <i class="fa-solid fa-cube"></i>
-            artifact
-          </div>
-
-          <div class="fragment recursion-arrow">→</div>
-
-          <div class="fragment recursion-item">
-            <i class="fa-solid fa-user-group"></i>
-            people
-          </div>
-
-          <div class="fragment recursion-arrow">→</div>
-
-          <div class="fragment recursion-item final">
-            <i class="fa-solid fa-rocket"></i>
-            next artifact
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <div class="slide-number"></div>
-</div>
--->
-
-<div class="slide">
-  <h2 class="slide-title">Q&A</h2>
-  <div class="content-area center-all pos-relative">
-    <div class="question-glow"></div>
-    <h2 class="fs-72 font-w900 lh-1-1 text-dark font-montserrat max-w-900">
-      А що у вас зараз <br>
-      <span class="purple-text">“просто демка”?</span><span class="blink-cursor"></span>
-    </h2>
-    <div class="qa-separator"></div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide">
-  <h2 class="slide-title">На зв'язку</h2>
-  <div class="content-area">
-    <div class="qr-grid-custom">
-      
-      <div class="qr-item">
-        <div class="qr-placeholder-custom">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://www.linkedin.com/in/ididyk"
-               alt="LinkedIn QR">
-        </div>
-        <p class="font-w800">LinkedIn</p>
-        <a href="https://www.linkedin.com/in/ididyk" target="_blank" class="qr-link">linkedin.com/in/ididyk</a>
-      </div>
-      
-      <div class="qr-item">
-        <div class="qr-placeholder-custom-lime">
-          <img
-              src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com/ih0r-d/polyglot-platform"
-              alt="GitHub QR">
-        </div>
-        <p class="font-w800">Polyglot platform repository</p>
-        <a href="https://github.com/ih0r-d/polyglot-platform" target="_blank" class="qr-link">github.com/ih0r-d/polyglot-platform</a>
-      </div>
-      
-      <div class="qr-item">
-        <div class="qr-placeholder-custom">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://t.me/%2BH9bkRklQQhowZjgy"
-               alt="Community QR">
-        </div>
-        <p class="font-w800">Litcoders</p>
-        <a href="https://t.me/+H9bkRklQQhowZjgy" target="_blank" class="qr-link">https://t.me/+H9bkRklQQhowZjgy</a>
-      </div>
-    </div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide join-team-slide bg-dark text-white">
-  <div class="mesh-bg opacity-30"></div>
-  <div class="content-area">
-    <p class="mono join-team-tag">// next_step: scan_and_apply()</p>
-    <div class="join-team-layout">
-      <div class="join-team-copy">
-        <h2 class="join-team-title">Join our team</h2>
-        <p class="join-team-note">
-          Pwrteams Careers
-        </p>
-        <a href="https://pwrteams.com/careers" target="_blank" class="join-team-link">
-          pwrteams.com/careers
-        </a>
-      </div>
-
-      <div class="join-team-qr-card">
-        <div class="join-team-qr-frame">
-          <img
-              src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=https://pwrteams.com/careers"
-              alt="Pwrteams Careers QR">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-number"></div>
-</div>
-
-<div class="slide slide-title-bg final-title-slide">
-
-  <div class="separator-lime"></div>
-  <h1>Networking,<br><span class="text-purple">якого я не планував</span></h1>
-  <p class="mono mt-40">// success: connection established. Exit 0.</p>
-  <div class="slide-number"></div>
-
-</div>
-
-<script src="js/navigation.js"></script>
+  </section>
+
+  <div class="system-line" id="message">status: waiting for next sync</div>
+</main>
+
+<script>
+  const target = new Date('2026-07-30T19:00:00+03:00').getTime();
+
+  const nodes = {
+    days: document.getElementById('days'),
+    hours: document.getElementById('hours'),
+    minutes: document.getElementById('minutes'),
+    seconds: document.getElementById('seconds'),
+    message: document.getElementById('message')
+  };
+
+  const labels = {
+    waiting: 'status: waiting for next sync',
+    live: 'status: sync is live'
+  };
+
+  function format(value) {
+    return Math.max(0, value).toString().padStart(2, '0');
+  }
+
+  function updateCountdown() {
+    const diff = target - Date.now();
+
+    if (diff <= 0) {
+      nodes.days.textContent = '00';
+      nodes.hours.textContent = '00';
+      nodes.minutes.textContent = '00';
+      nodes.seconds.textContent = '00';
+      nodes.message.textContent = labels.live;
+      document.title = 'Networking — Live';
+      return;
+    }
+
+    nodes.days.textContent = format(Math.floor(diff / 864e5));
+    nodes.hours.textContent = format(Math.floor((diff % 864e5) / 36e5));
+    nodes.minutes.textContent = format(Math.floor((diff % 36e5) / 6e4));
+    nodes.seconds.textContent = format(Math.floor((diff % 6e4) / 1e3));
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
